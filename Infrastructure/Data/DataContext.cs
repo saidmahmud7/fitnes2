@@ -14,9 +14,19 @@ public class DataContext(DbContextOptions<DataContext> options) : DbContext(opti
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<WorkoutSession>()
-            .HasOne(t=>t.TrainerId)
-            .WithMany(w=>w.Wo)
+        modelBuilder.Entity<Trainer>()
+            .HasMany(t => t.WorkoutSessions)
+            .WithOne(ws => ws.Trainer)
+            .HasForeignKey(w => w.TrainerId);
+        modelBuilder.Entity<Workout>()
+            .HasMany(w => w.WorkoutSessions)
+            .WithOne(sw => sw.Workout)
+            .HasForeignKey(s => s.WorkoutId);
+        modelBuilder.Entity<Client>()
+            .HasMany(c => c.WorkoutSessions)
+            .WithOne(ws => ws.Client)
+            .HasForeignKey(w => w.ClientId);
+
     }
 }
 

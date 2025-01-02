@@ -763,11 +763,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lenovo\\Desktop\\Exam4\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\Lenovo\\Desktop\\fitnes2\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "C:\\Users\\Lenovo\\Desktop\\Exam4\\Infrastructure\\Infrastructure.csproj",
+      "projectPath": "C:\\Users\\Lenovo\\Desktop\\fitnes2\\Infrastructure\\Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lenovo\\Desktop\\Exam4\\Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\Lenovo\\Desktop\\fitnes2\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -782,8 +782,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Lenovo\\Desktop\\Exam4\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\Lenovo\\Desktop\\Exam4\\Domain\\Domain.csproj"
+            "C:\\Users\\Lenovo\\Desktop\\fitnes2\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\Lenovo\\Desktop\\fitnes2\\Domain\\Domain.csproj"
             }
           }
         }
@@ -792,6 +792,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {

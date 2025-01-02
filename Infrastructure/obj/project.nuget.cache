@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KOnKQiuW/EUCFD+HefVMqZbGwpEMRapz2XNWMrNvEpgllfETK9oNTE3qjfdoAkjNL/5nurS6jLG13jTv0U8xmw==",
+  "dgSpecHash": "sFACXg8KLc7Y8ZO5otywOPSPULRNCNzVmiU/+8iaQLZ2ehUqKBu9DU9K7i/6Y4evq7CoaqGIA9Okr5TColBb6Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Lenovo\\Desktop\\Exam4\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\Lenovo\\Desktop\\fitnes2\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.0\\microsoft.entityframeworkcore.9.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.0\\microsoft.entityframeworkcore.abstractions.9.0.0.nupkg.sha512",

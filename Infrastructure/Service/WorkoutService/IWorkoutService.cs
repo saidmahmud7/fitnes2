@@ -10,6 +10,6 @@ public interface IWorkoutService
     Task<ApiResponse<List<GetWorkoutDto>>> GetAll();
     Task<ApiResponse<Workout>> GetById(int id);
     Task<ApiResponse<string>> Create(CreateWorkoutDto workout);
-    Task<ApiResponse<string>> Update(UpdateTrainerDto workout);
+    Task<ApiResponse<string>> Update(UpdateWorkoutDto workout);
     Task<ApiResponse<string>> Delete(int id);
 }

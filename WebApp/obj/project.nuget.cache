@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "s1dfW157fWDyPh1Aeb/fv6Do/xIHsavVtI7J8G3aNkLA1juP8Hvr+GmNzdoON88sHeH3+7//atdmTbLpsbE6wQ==",
+  "dgSpecHash": "s9vw1Z5PHkPyJ9yoF8aWQEuX3Tr52WUFNob6An8x5KaEVMIRdVCQe3TDIS4j07IVE81I9yoPlu5gUCYlOeStPg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Lenovo\\Desktop\\Exam4\\WebApp\\WebApp.csproj",
+  "projectFilePath": "C:\\Users\\Lenovo\\Desktop\\fitnes2\\WebApp\\WebApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lenovo\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.4\\microsoft.aspnetcore.openapi.8.0.4.nupkg.sha512",

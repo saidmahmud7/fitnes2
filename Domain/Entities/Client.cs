@@ -15,4 +15,6 @@ public class Client
     public string Email { get; set; }
     public DateTime DateOfBirth { get; set; }
     public string MembershipStatus { get; set; }
+    
+    public List<WorkoutSession> WorkoutSessions { get; set; }
 }

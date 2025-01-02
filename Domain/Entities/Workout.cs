@@ -15,4 +15,5 @@ public class Workout
     public int MaxParticipants { get; set; }
     public string Difficulty { get; set; }
     public bool IsActive { get; set; }
+    public List<WorkoutSession> WorkoutSessions { get; set; }
 }

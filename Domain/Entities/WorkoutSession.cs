@@ -16,8 +16,10 @@ public class WorkoutSession
     public DateTime CreatedAt { get; set; }
     //foreign Key
     public int ClientId { get; set; }
-    public List<Client> Clients { get; set; } = [];
+    public Client Client { get; set; }
+    
     public  int WorkoutId { get; set; }
-    public List<Workout> Workouts { get; set; } = [];
+    public Workout Workout { get; set; }
     public  int TrainerId { get; set; }
+    public Trainer Trainer { get; set; }
 }

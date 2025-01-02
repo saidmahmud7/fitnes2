@@ -1,88 +1,103 @@
 ﻿using System.Net;
+using Domain.DTO_s;
 using Domain.DTO_s.TrainerDto;
+using Domain.DTO_s.WorkoutSessionDto;
 using Domain.Entities;
+using Infrastructure.Response;
 using Infrastructure.Data;
 using Infrastructure.Response;
+using Infrastructure.Service.TrainerService;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Service.TrainerService;
+namespace Infrastructure.Services;
 
 public class TrainerService(DataContext context) : ITrainerService
 {
     public async Task<ApiResponse<List<GetTrainerDto>>> GetAll()
     {
-        var trainers = await context.Trainers
-            .ToListAsync();
-        var trainerDto = trainers.Select(t => new GetTrainerDto()
+        var c = context.Trainers.Include(x => x.WorkoutSessions).AsQueryable();
+
+        var trainers = c.Select(f => new GetTrainerDto()
         {
-            FirstName = t.FirstName,
-            LastName = t.LastName,
-            PhoneNumber = t.PhoneNumber,
-            Experience = t.Experience,
-            Status = t.Status,
-            Specialization = t.Specialization,
+            FirstName = f.FirstName,
+            LastName = f.LastName,
+            PhoneNumber = f.PhoneNumber,
+            Experience = f.Experience,
+            Status = f.Status,
+            Specialization = f.Specialization,
+            WorkoutSessions = f.WorkoutSessions.Select(w => new GetWorkoutSessionDto()
+            {
+                SessionDate = w.SessionDate,
+                StartTime = w.StartTime,
+                EndTime = w.EndTime,
+                Status = w.Status,
+                Comment = w.Comment,
+                MaxCapacity = w.MaxCapacity,
+                CurrentParticipants = w.CurrentParticipants,
+                CreatedAt = w.CreatedAt,
+            }).ToList()
         }).ToList();
-        return new ApiResponse<List<GetTrainerDto>>(trainerDto);
+        return new ApiResponse<List<GetTrainerDto>>(trainers);
     }
 
     public async Task<ApiResponse<Trainer>> GetById(int id)
     {
-        var trainer = await context.Trainers.FirstOrDefaultAsync(t => t.Id == id);
+        var trainer = await context.Trainers.FirstOrDefaultAsync(w => w.Id == id);
         return trainer == null
-            ? new ApiResponse<Trainer>(HttpStatusCode.InternalServerError, "Trainer not Created")
+            ? new ApiResponse<Trainer>(HttpStatusCode.InternalServerError, "trainer not Created")
             : new ApiResponse<Trainer>(trainer);
     }
 
-    public async Task<ApiResponse<string>> Create(CreateTrainerDto trainer)
+    public async Task<ApiResponse<string>> Create(CreateTrainerDto trainerDTO)
     {
-        var trainerDto = new Trainer()
+        var trainer = new Trainer()
         {
-            FirstName = trainer.FirstName,
-            LastName = trainer.LastName,
-            PhoneNumber = trainer.PhoneNumber,
-            Experience = trainer.Experience,
-            Status = trainer.Status,
-            Specialization = trainer.Specialization
+            FirstName = trainerDTO.FirstName,
+            LastName = trainerDTO.LastName,
+            PhoneNumber = trainerDTO.PhoneNumber,
+            Experience = trainerDTO.Experience,
+            Status = trainerDTO.Status,
+            Specialization = trainerDTO.Specialization
         };
-        context.Trainers.AddAsync(trainerDto);
-        var res = await context.SaveChangesAsync();
-        return res == 0
-            ? new ApiResponse<string>(HttpStatusCode.InternalServerError, "Trainer not Created")
-            : new ApiResponse<string>("Created Succesfuly");
+        context.Trainers.Add(trainer);
+        var result = await context.SaveChangesAsync();
+        return result == 0
+            ? new ApiResponse<string>(HttpStatusCode.InternalServerError, "Internal Server Error")
+            : new ApiResponse<string>(HttpStatusCode.Created, "Trainer Added");
     }
 
-    public async Task<ApiResponse<string>> Update(UpdateTrainerDto trainer)
+    public async Task<ApiResponse<string>> Update(UpdateTrainerDto trainerDTO)
     {
-        var existingTrainer = await context.Trainers.FirstOrDefaultAsync(t => t.Id == trainer.Id);
+        var existingTrainer = await context.Trainers.FirstOrDefaultAsync(x => x.Id == trainerDTO.Id);
         if (existingTrainer == null)
         {
-            return new ApiResponse<string>(HttpStatusCode.NotFound, "Trainer Not Found");
+            return new ApiResponse<string>(HttpStatusCode.NotFound, "Trainer not found");
         }
 
-        existingTrainer.FirstName = trainer.FirstName;
-        existingTrainer.LastName = trainer.LastName;
-        existingTrainer.PhoneNumber = trainer.PhoneNumber;
-        existingTrainer.Experience = trainer.Experience;
-        existingTrainer.Status = trainer.Status;
-        existingTrainer.Specialization = trainer.Specialization;
-        var res = await context.SaveChangesAsync();
-        return res == 0
-            ? new ApiResponse<string>(HttpStatusCode.InternalServerError, "Trainer not updated")
-            : new ApiResponse<string>("Updated succesfully");
+        existingTrainer.FirstName = trainerDTO.FirstName;
+        existingTrainer.LastName = trainerDTO.LastName;
+        existingTrainer.PhoneNumber = trainerDTO.PhoneNumber;
+        existingTrainer.Experience = trainerDTO.Experience;
+        existingTrainer.Status = trainerDTO.Status;
+        existingTrainer.Specialization = trainerDTO.Specialization;
+        var result = await context.SaveChangesAsync();
+        return result == 0
+            ? new ApiResponse<string>(HttpStatusCode.InternalServerError, "Internal Server Error")
+            : new ApiResponse<string>(HttpStatusCode.Created, "Trainer updated");
     }
 
     public async Task<ApiResponse<string>> Delete(int id)
     {
-        var existingTrainer = await context.Trainers.FirstOrDefaultAsync(t => t.Id == id);
+        var existingTrainer = await context.Trainers.FirstOrDefaultAsync(x => x.Id == id);
         if (existingTrainer == null)
         {
-            return new ApiResponse<string>(HttpStatusCode.NotFound, "Trainer Not Found");
+            return new ApiResponse<string>(HttpStatusCode.NotFound, "Trainer not found");
         }
 
         context.Trainers.Remove(existingTrainer);
-        var res = await context.SaveChangesAsync();
-        return res == 0
-            ? new ApiResponse<string>(HttpStatusCode.InternalServerError, "Trainer not Deleted")
-            : new ApiResponse<string>("Deleted");
+        var result = await context.SaveChangesAsync();
+        return result == 0
+            ? new ApiResponse<string>(HttpStatusCode.InternalServerError, "Internal Server Error")
+            : new ApiResponse<string>(HttpStatusCode.Created, "Trainer deleted");
     }
 }

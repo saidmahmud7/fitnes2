@@ -1,4 +1,7 @@
-﻿namespace Domain.DTO_s.ClientDto;
+﻿using Domain.DTO_s.WorkoutSessionDto;
+using Domain.Entities;
+
+namespace Domain.DTO_s.ClientDto;
 
 public class GetClientDto
 {
@@ -7,5 +10,6 @@ public class GetClientDto
     public string PhoneNumber { get; set; }
     public string Email { get; set; }
     public DateTime DateOfBirth { get; set; }
-    public string MembershipStatus { get; set; } 
+    public string MembershipStatus { get; set; }
+    public List<GetWorkoutSessionDto> WorkoutSessions { get; set; }
 }
